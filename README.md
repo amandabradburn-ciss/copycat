@@ -5,7 +5,7 @@ CopyCat is a web-based code analysis tool that analyzes Python code for common s
 ## Team Members
 - Amanda Bradburn – Backend / Security / Integration
 - Will Davis – AI / LLM Integration
-- Nolan – Frontend
+- Nolan Biggers – Frontend
 
 ## Planned Stack
 - Frontend: HTML, CSS, minimal JavaScript
