@@ -88,7 +88,12 @@ def submit():
             config = genai.types.GenerateContentConfig(response_mime_type="application/json",)
         )
 
-        llm_response = json.loads(response.text)
+        raw_text = response.text.strip()
+        if raw_text.startswith("```"):
+            raw_text = raw_text.strip("`").strip()
+            if raw_text.lower().startswith("json"):
+                raw_text = raw_text[4:].strip()
+        llm_response = json.loads(raw_text)
         #commented out for now, uncomment later for actually parsing info
         #return jsonify({"message": llm_response})
 
