@@ -79,7 +79,11 @@ def submit():
 
         prompt = prompt.replace("\r\n", "\n").replace("\r", "")
         response = client.models.generate_content(
-            model = "gemini-2.5-flash",
+            # local testing
+            # model = "gemini-2.5-flash"
+
+            # live website
+            model = "gemma-4-31b-it",
             contents = prompt,
             config = genai.types.GenerateContentConfig(response_mime_type="application/json",)
         )
