@@ -83,7 +83,7 @@ def submit():
             # model = "gemini-2.5-flash"
 
             # live website
-            model = "gemma-4-31b-it",
+            model = "gemini-3.1-flash-lite",
             contents = prompt,
             config = genai.types.GenerateContentConfig(response_mime_type="application/json",)
         )
