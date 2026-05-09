@@ -5,6 +5,8 @@ button.addEventListener("click", sendToBackend);
 function sendToBackend() {
     let text = document.getElementById("textBox").value;
 
+    //for live website, replace other fetch
+    //fetch("https://web.williamodavis.me/submit", {
     fetch("http://127.0.0.1:5000/submit", {
         method: "POST",
         headers: {

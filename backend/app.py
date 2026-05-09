@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from google import genai
 from dotenv import load_dotenv
+import sys
 import subprocess
 import tempfile
 import os
@@ -34,7 +35,7 @@ def submit():
             temp_file_path = temp_file.name
 
         result = subprocess.run(
-            ["bandit", "-f", "json", temp_file_path],
+            [sys.executable, "-m", "bandit", "-f", "json", temp_file_path],
             capture_output=True,
             text=True
         )
@@ -76,6 +77,7 @@ def submit():
 
         """
 
+        prompt = prompt.replace("\r\n", "\n").replace("\r", "")
         response = client.models.generate_content(
             model = "gemma-4-31b-it",
             contents = prompt,
@@ -96,3 +98,5 @@ def submit():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    #for live website
+    #app.run(host="127.0.0.1", port="5000")
