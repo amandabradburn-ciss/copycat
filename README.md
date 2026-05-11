@@ -48,10 +48,31 @@ Bandit detects the insecure use of `eval()` and reports the associated vulnerabi
 frontend/   - HTML/CSS/JavaScript frontend
 backend/    - Flask backend and Bandit integration
 ```
+## Environment Variables
+
+Create a `.env` file inside the backend folder:
+
+```text
+GEMINI_API_KEY=your_api_key_here
+```
+
+A sample `.env.example` file is included in the repository.
 
 # Setup Instructions
 
-## Backend Setup
+## Live Demo
+
+Hosted version:
+
+```text
+https://web.williamodavis.me/copycat/frontend/
+```
+
+The live deployment connects the frontend interface to the hosted Flask backend and allows users to submit Python code for analysis directly through the browser.
+
+## Local Development Setup
+
+### Backend Setup
 
 ```bash
 cd backend
@@ -67,7 +88,7 @@ Backend runs on:
 http://127.0.0.1:5000
 ```
 
-## Frontend Setup
+### Frontend Setup
 
 Open:
 
@@ -75,4 +96,38 @@ Open:
 frontend/index.html
 ```
 
-in a browser while the Flask backend is running.
+in a browser while the Flask backend is running locally.
+
+## Example API Request
+
+Example curl request to the Flask backend:
+
+```bash
+curl -X POST http://127.0.0.1:5000/submit \
+-H "Content-Type: application/json" \
+-d '{"text":"user_input = input()\neval(user_input)"}'
+```
+
+## Testing
+
+Basic manual and functional testing was performed on the frontend and Flask backend.
+
+Tested functionality includes:
+
+- Empty input validation
+- Successful POST requests to `/submit`
+- Detection of insecure `eval()` usage
+- JSON response formatting
+- Frontend/backend communication
+- Hosted deployment testing
+
+## Security and Static Analysis
+
+Bandit was used for static analysis of submitted Python code and backend security testing.
+
+Example vulnerabilities identified include:
+- Unsafe use of `eval()`
+- Insecure subprocess usage
+- Debug mode enabled in Flask
+
+Security findings and planned fixes were documented using the project issue tracking system.
