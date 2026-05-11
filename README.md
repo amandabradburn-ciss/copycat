@@ -121,6 +121,14 @@ Tested functionality includes:
 - Frontend/backend communication
 - Hosted deployment testing
 
+Basic backend unit tests were implemented using PyTest.
+
+Run tests from the command line with:
+
+```bash
+PYTHONPATH=. pytest
+```
+
 ## Security and Static Analysis
 
 Bandit was used for static analysis of submitted Python code and backend security testing.
