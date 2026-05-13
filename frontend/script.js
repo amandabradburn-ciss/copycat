@@ -16,8 +16,14 @@ function sendToBackend() {
     })
     .then(response => response.json())
     .then(data => {
-        const output = document.getElementById("output"); 
-        output.classList.remove("hidden");
-        output.innerText = data.message;
-    });
+
+    const head = document.getElementById("resultsHeader");
+    const output = document.getElementById("output");
+
+    head.classList.remove("hidden");
+
+    output.textContent = data.message;  // or test text
+    output.classList.remove("hidden");
+
+});
 }

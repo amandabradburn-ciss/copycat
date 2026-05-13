@@ -21,7 +21,11 @@ h1 {
     margin: 0 auto;
     width: 60%;
     border-radius:2px;   
-    padding: 100px;  
+    padding: 10px;  
+    box-sizing: border-box;
+    height: 70vh;
+    resize: none;
+    
 }
 
 .submit-code{
@@ -42,4 +46,21 @@ h1 {
 
 .hidden{
     display: none;
+}
+#resultsHeader{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(161, 33, 33);
+}
+#output {
+    width: 60%;
+    margin: 10px auto;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 2px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    box-sizing: border-box;
 }
