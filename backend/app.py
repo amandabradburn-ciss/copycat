@@ -80,10 +80,10 @@ def submit():
         prompt = prompt.replace("\r\n", "\n").replace("\r", "")
         response = client.models.generate_content(
             # local testing
-            # model = "gemini-2.5-flash"
+             model = "gemini-2.5-flash",
 
             # live website
-            model = "gemini-3.1-flash-lite",
+            #model = "gemini-3.1-flash-lite",
             contents = prompt,
             config = genai.types.GenerateContentConfig(response_mime_type="application/json",)
         )
