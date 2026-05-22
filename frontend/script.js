@@ -5,7 +5,7 @@ button.addEventListener("click", sendToBackend);
 
 function sendToBackend() {
     let text = document.getElementById("textBox").value.trim();
-    const language = document.getElementById("language").value;
+    const language = document.getElementById("languageSelect").value;
 
     if (text.length === 0) {
         alert("Input cannot be empty");
