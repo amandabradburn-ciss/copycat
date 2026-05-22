@@ -18,12 +18,11 @@
         Enter a passcode below for access to better AI models - ignore if you're running locally or don't have a passcode.
     </p>
     <div class="controls">
-        <label class="language-label" id="languageLabel">Choose a language:</label>
             <select class ="language-select" name="language" id="languageSelect">
                 <option value="python">Python</option>
-                <option value="javascript">JavaScript</option>
-                <option value="java">Java</option>
-                <option value="cpp">C++</option>
+                <option value="javascript" class = "beta">JavaScript (Beta)</option>
+                <option value="java" class = "beta">Java (Beta)</option>
+                <option value="cpp" class = "beta">C++ (Beta)</option>
             </select>
         
             <input type="password" class="passcode-input" id="passcodeBox" placeholder="Enter passcode here">
@@ -37,6 +36,16 @@
 
    <h2 class="hidden" id="resultsHeader">Results</h2>
     <pre class="hidden" id="output"></pre>
+
+        <div class="mitre-link">
+            <a
+                href="https://cwe.mitre.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                CWE Reference Guide
+            </a>
+        </div>
 
     <script src="script.js"></script>
 </body>
