@@ -1,9 +1,11 @@
 const button = document.getElementById("submitCode");
 
+
 button.addEventListener("click", sendToBackend);
 
 function sendToBackend() {
     let text = document.getElementById("textBox").value.trim();
+    const language = document.getElementById("language").value;
 
     if (text.length === 0) {
         alert("Input cannot be empty");
@@ -26,19 +28,31 @@ function sendToBackend() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ text: text })
+        body: JSON.stringify({ text: text, language: language })
     })
     .then(res => res.json())
     .then(data => {
 
     const output = document.getElementById("output");
 
-    output.textContent = `Status: ${data.status || "ok"}\n\n`;
+    output.textContent = "";
+     
+    if (data.status && data.status !== "ok") {
+        output.textContent += `Status: ${data.status}\n\n`;
+    }
 
     let vulnerabilities = data.message;
-
     if (typeof vulnerabilities === "string") {
+    try {
         vulnerabilities = JSON.parse(vulnerabilities);
+    } catch (e) {
+        vulnerabilities = [];
+    }
+    }
+
+    if (vulnerabilities.length === 0) {
+    output.textContent = "No vulnerabilities found.";
+    return; // 🔥 STOP HERE
     }
 
     vulnerabilities.forEach((item, index) => {

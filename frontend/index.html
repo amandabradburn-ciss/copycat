@@ -8,13 +8,24 @@
 </head>
 <body>
 
-    <h1>CopyCat</h1>
+    <header class = "title-header">
+        <h1>CopyCat</h1>
+    </header>
 
     <p class="code-header">
-        Insert your code in the text box below and click submit to see results
+        Welcome to CopyCat!<br>
+        CopyCat is a code vulnerability scanner. Insert your code below and click "Submit" to scan for vulnerabilities.<br>
     </p>
 
+     <label class="language-label" id="languageLabel">Choose a language:</label>
+        <select class ="language-select" name="language" id="languageSelect">
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="java">Java</option>
+            <option value="cpp">C++</option>
+        </select>
     <textarea class="code-input" id="textBox" placeholder="Insert code here"></textarea>
+
 
     <div class="submit-code">
         <button class="submit-button" id="submitCode">Submit</button>
