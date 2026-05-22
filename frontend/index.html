@@ -15,15 +15,19 @@
     <p class="code-header">
         Welcome to CopyCat!<br>
         CopyCat is a code vulnerability scanner. Insert your code below and click "Submit" to scan for vulnerabilities.<br>
+        Enter a passcode below for access to better AI models - ignore if you're running locally or don't have a passcode.
     </p>
-
-     <label class="language-label" id="languageLabel">Choose a language:</label>
-        <select class ="language-select" name="language" id="languageSelect">
-            <option value="python">Python</option>
-            <option value="javascript">JavaScript</option>
-            <option value="java">Java</option>
-            <option value="cpp">C++</option>
-        </select>
+    <div class="controls">
+        <label class="language-label" id="languageLabel">Choose a language:</label>
+            <select class ="language-select" name="language" id="languageSelect">
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+            </select>
+        
+            <input type="password" class="passcode-input" id="passcodeBox" placeholder="Enter passcode here">
+        </div>
     <textarea class="code-input" id="textBox" placeholder="Insert code here"></textarea>
 
 

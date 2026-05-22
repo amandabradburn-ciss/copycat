@@ -6,6 +6,7 @@ button.addEventListener("click", sendToBackend);
 function sendToBackend() {
     let text = document.getElementById("textBox").value.trim();
     const language = document.getElementById("languageSelect").value;
+    const passcode = document.getElementById("passcodeBox").value;
 
     if (text.length === 0) {
         alert("Input cannot be empty");
@@ -28,7 +29,7 @@ function sendToBackend() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ text: text, language: language })
+        body: JSON.stringify({ text: text, language: language, passcode: passcode })
     })
     .then(res => res.json())
     .then(data => {
