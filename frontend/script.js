@@ -54,6 +54,8 @@ function sendToBackend() {
 
     if (vulnerabilities.length === 0) {
     output.textContent = "No vulnerabilities found.";
+    document.getElementById("resultsHeader").classList.remove("hidden");
+    output.classList.remove("hidden");
     return; // Exit early if no vulnerabilities to display
     }
 

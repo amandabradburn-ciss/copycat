@@ -9,14 +9,17 @@ import os
 import json
 import logging
 
+# Load environment variables from .env
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
 if not api_key:
     api_key = "test-key"
 
+# Initialize Flask backend
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 app.logger.info("CopyCat backend started")
+# Enable CORS so frontend can communicate with backend
 CORS(app)
 client = genai.Client(api_key=api_key)
 
@@ -24,11 +27,19 @@ client = genai.Client(api_key=api_key)
 def home():
     return "CopyCat backend is running."
 
+# Main API route for code submissions
 @app.route("/submit", methods=["POST"])
 def submit():
     data = request.get_json()
     code = data.get("text", "")
+    # Prevent oversized submissions that could impact performance
+    if len(code) > 10000:
+        app.logger.warning("Rejected oversized code submission")
+        return jsonify({
+            "message": "Code input too large. Please submit less than 10,000 characters."
+        }), 400
     language = data.get("language", "")
+    # Track incoming scan requests for debugging and monitoring
     app.logger.info(f"Received {language} scan request")
 
     input_passcode = data.get("passcode", "")
@@ -37,6 +48,7 @@ def submit():
 
     premium = False
 
+# Premium passcodes allow access to stronger AI models
     if input_passcode == real_passcode_1:
         ai_model = "gemini-3.5-flash"
         premium = True
@@ -51,6 +63,7 @@ def submit():
 
     try:
         if language == "python":
+            # Run Bandit static analysis on temporary Python file
             with tempfile.NamedTemporaryFile(delete=False, suffix=".py", mode="w") as temp_file:
                 temp_file.write(code)
                 temp_file_path = temp_file.name
@@ -66,7 +79,10 @@ def submit():
             bandit_output = result.stdout
 
             if not bandit_output.strip():
-                bandit_output = "No security issues found."
+                return jsonify({
+                    "message": "No security issues found.",
+                    "premium": premium
+                })
 
             prompt = f"""
             You are a programmer evaluating the security of a section of Python code that someone else wrote. You ran the code through Bandit and got the below output.
@@ -124,6 +140,7 @@ def submit():
         #print(f"Making request with {ai_model}...")
 
         prompt = prompt.replace("\r\n", "\n").replace("\r", "")
+        # Send Bandit findings to Gemini for simplified explanations
         response = client.models.generate_content(
             # general use - quick and cheap
             model = "gemini-2.5-flash",
@@ -138,6 +155,7 @@ def submit():
             config = genai.types.GenerateContentConfig(response_mime_type="application/json",)
         )
 
+        # Convert AI response into formatted JSON output
         raw_text = response.text.strip()
         if raw_text.startswith("```"):
             raw_text = raw_text.strip("`").strip()
@@ -149,17 +167,19 @@ def submit():
 
         #temp output display
         basic_text = json.dumps(llm_response, indent=4)
+        # Return formatted results to frontend
         return jsonify({
             "message": basic_text,
             "premium": premium
         })
 
+    # Log backend errors while returning safe error message to frontend
     except Exception as e:
         app.logger.error(f"Error during scan request: {str(e)}")
         return jsonify({"message": f"Error: {str(e)}"}), 500
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
     #for live website
     #app.run(host="127.0.0.1", port="5000")
