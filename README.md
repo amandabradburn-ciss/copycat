@@ -8,10 +8,12 @@ CopyCat is a web-based code analysis tool that analyzes Python code for common s
 - Nolan Biggers – Frontend
 
 ## Tech Stack
-- Frontend: HTML, CSS, minimal JavaScript
+- Frontend: HTML, CSS, JavaScript
 - Backend: Python, Flask
 - Static Analysis: Bandit
-- AI: Gemma
+- AI Integration: Google Gemini API
+- CI/CD: GitHub Actions
+- Testing: PyTest
 
 ## MVP
 - User submits Python code
@@ -25,11 +27,20 @@ CopyCat is a web-based code analysis tool that analyzes Python code for common s
 - Frontend interface for code submission
 - Flask backend API
 - Python code scanning using Bandit
+- AI-generated vulnerability explanations and suggested fixes
 - Vulnerability findings displayed in browser
 - JSON communication between frontend and backend
+- Enhanced AI mode support using optional passcodes
+- Basic multi-language beta support (JavaScript, Java, C++)
+- Logging and backend request monitoring
+- GitHub Actions CI workflow for automated testing and scanning
 
 # Current Status
-The backend and frontend are successfully connected. Users can submit Python code through the web interface, and the backend performs static analysis using Bandit.
+The frontend and backend are fully integrated and operational. Users can submit Python code through the web interface, and the backend performs static analysis using Bandit before sending findings to the AI analysis system.
+
+The project also includes a GitHub Actions CI pipeline that automatically installs dependencies, runs backend tests, and performs Bandit security scans on every push to the repository.
+
+Additional beta language selections were added to demonstrate future expansion capabilities for multi-language support.
 
 # Example Vulnerability Detection
 
@@ -50,13 +61,19 @@ backend/    - Flask backend and Bandit integration
 ```
 ## Environment Variables
 
+## Environment Variables
+
 Create a `.env` file inside the backend folder:
 
 ```text
 GEMINI_API_KEY=your_api_key_here
+PASSCODE1=your_passcode_here
+PASSCODE2=your_passcode_here
 ```
 
 A sample `.env.example` file is included in the repository.
+
+Optional passcodes allow access to enhanced AI model modes during hosted demonstrations.
 
 # Setup Instructions
 
@@ -110,32 +127,29 @@ curl -X POST http://127.0.0.1:5000/submit \
 
 ## Testing
 
-Basic manual and functional testing was performed on the frontend and Flask backend.
+Basic backend unit tests were implemented using PyTest and integrated into the GitHub Actions CI pipeline.
 
-Tested functionality includes:
-
-- Empty input validation
-- Successful POST requests to `/submit`
-- Detection of insecure `eval()` usage
-- JSON response formatting
-- Frontend/backend communication
-- Hosted deployment testing
-
-Basic backend unit tests were implemented using PyTest.
-
-Run tests from the command line with:
+Run tests locally with:
 
 ```bash
 PYTHONPATH=. pytest
 ```
+
+The CI workflow automatically:
+- Installs backend dependencies
+- Runs backend unit tests
+- Performs Bandit security scans
+- Validates backend stability on push
 
 ## Security and Static Analysis
 
 Bandit was used for static analysis of submitted Python code and backend security testing.
 
 Example vulnerabilities identified include:
-- Unsafe use of `eval()`
+- Unsafe use of eval()
 - Insecure subprocess usage
 - Debug mode enabled in Flask
 
-Security findings and planned fixes were documented using the project issue tracking system.
+Security findings are displayed to the user along with AI-generated explanations, severity levels, CWE references, and suggested mitigation guidance.
+
+Known limitations and future hardening tasks are documented through the project issue tracking system.
