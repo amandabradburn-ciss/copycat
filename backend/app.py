@@ -7,6 +7,7 @@ import subprocess
 import tempfile
 import os
 import json
+import logging
 
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
@@ -14,6 +15,8 @@ if not api_key:
     raise ValueError("No API key found.")
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+app.logger.info("CopyCat backend started")
 CORS(app)
 client = genai.Client(api_key=api_key)
 
@@ -26,16 +29,21 @@ def submit():
     data = request.get_json()
     code = data.get("text", "")
     language = data.get("language", "")
+    app.logger.info(f"Received {language} scan request")
 
     input_passcode = data.get("passcode", "")
     real_passcode_1 = os.environ.get("PASSCODE1")
     real_passcode_2 = os.environ.get("PASSCODE2")
 
+    premium = False
+
     if input_passcode == real_passcode_1:
         ai_model = "gemini-3.5-flash"
+        premium = True
     elif input_passcode == real_passcode_2:
         ai_model = "gemini-3.1-pro-preview"
-    else: 
+        premium = True
+    else:
         ai_model = "gemini-2.5-flash"
 
     if not code.strip():
@@ -141,9 +149,13 @@ def submit():
 
         #temp output display
         basic_text = json.dumps(llm_response, indent=4)
-        return jsonify({"message": basic_text})
+        return jsonify({
+            "message": basic_text,
+            "premium": premium
+        })
 
     except Exception as e:
+        app.logger.error(f"Error during scan request: {str(e)}")
         return jsonify({"message": f"Error: {str(e)}"}), 500
 
 
