@@ -59,7 +59,6 @@ Bandit detects the insecure use of `eval()` and reports the associated vulnerabi
 frontend/   - HTML/CSS/JavaScript frontend
 backend/    - Flask backend and Bandit integration
 ```
-## Environment Variables
 
 ## Environment Variables
 
