@@ -1,8 +1,9 @@
 const button = document.getElementById("submitCode");
 
-
+// if the submit button clicked
 button.addEventListener("click", sendToBackend);
 
+// gets the language, code input, and passcode
 function sendToBackend() {
     let text = document.getElementById("textBox").value.trim();
     const language = document.getElementById("languageSelect").value;
@@ -13,7 +14,7 @@ function sendToBackend() {
         alert("Input cannot be empty");
         return;
     } 
-
+    // no large inputs
     if (text.length > 5000) {
         alert("Input too long");
         return;
@@ -58,7 +59,7 @@ function sendToBackend() {
     output.classList.remove("hidden");
     return; // Exit early if no vulnerabilities to display
     }
-
+// basic format to parse what the LLM sends back 
     vulnerabilities.forEach((item, index) => {
         output.textContent +=
 `[${index + 1}] ${item.Vulnerability}
@@ -73,17 +74,17 @@ ${item["Suggested Fix"]}
 -----------------------------------
 
 `;
-    });
+    }); // this removed the hidden output after submit is finished 
 
     document.getElementById("resultsHeader").classList.remove("hidden");
     output.classList.remove("hidden");
 })
-
+// basic error handling 
     .catch(err => {
         document.getElementById("output").textContent =
             "Error: unable to reach backend";
     })
-
+// re-enables the submit button 
     .finally(() => {
         button.disabled = false;
         button.textContent = "Submit";

@@ -1,3 +1,4 @@
+/*sets the  background / base of webpage*/
 body {
     margin: 0;
     font-family: system-ui, Arial, sans-serif;
@@ -14,7 +15,7 @@ body {
     );
 
 }
-
+/* copycat header */
 .title-header{ 
     width: 100%;
     height: 100px;
@@ -30,6 +31,7 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     
 }
+/* copycat logo*/
 .logo{
    backdrop-filter: blur(100px);
    border-radius: 50%;
@@ -40,7 +42,7 @@ body {
    left: 400px;
    
 }
-
+/* instructions */
 .code-header{
     display: block;
     text-align: center;
@@ -71,6 +73,7 @@ body {
     outline: none;
     transition: 0.2s ease;
 }
+/* chnages color of beta languages */
 .beta{
     color: aquamarine;
 }
@@ -78,6 +81,7 @@ body {
     border-color: #238636;
     box-shadow: 0 0 10px rgba(35, 134, 54, 0.3);
 }
+/* lang select*/
 .controls {
     display: flex;
     justify-content: center;
@@ -87,6 +91,7 @@ body {
 .controls .language-select {
     margin: 0;
 }
+/* for passcode*/
 .passcode-input {
     padding: 8px 12px;
     font-size: 14px;
@@ -99,10 +104,12 @@ body {
     transition: 0.2s ease;
     width: 150px;
 }
+/* when clicked changes color*/
 .passcode-input:focus {
     border-color: #238636;
     box-shadow: 0 0 10px rgba(84, 174, 84, 0.3);
 }
+/* format for the code box */
 .code-input{
 
     margin: 0 auto;
@@ -127,6 +134,7 @@ body {
     border-color: #238636;
     box-shadow: 0 0 10px rgba(84, 174, 84, 0.3);
 }
+/* changed the submit button if hovered */
 .submit-button:hover {
     background-color: rgb(70, 150, 70);
     transform: translateY(-2px);
@@ -153,7 +161,7 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     
 }
-
+/*will hide the output */
 .hidden{
     display: none;
 }
@@ -162,6 +170,7 @@ body {
     font-family: system-ui, Arial, sans-serif;
     color: #f0f6fc;
 }
+/* output format */
 #output {
     width: 60%;
     margin: 20px auto;
@@ -180,12 +189,13 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+/* link color and font */
 .mitre-link a {
     color:#dbdfdc;
     text-decoration: none;
     font-size: 0.9rem;
 }
-
+/* if link is hovered over */
 .mitre-link a:hover {
     text-decoration: underline;
 }
