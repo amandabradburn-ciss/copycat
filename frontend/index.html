@@ -8,7 +8,7 @@
 </head>
 <body>
     
-
+    <!--logo / cat image and header -->
     <header class = "title-header">
         <img class = "logo" src="cat3.png" alt="CopyCat">
         <h1>CopyCat</h1>
@@ -19,29 +19,29 @@
         CopyCat is a code analysis tool. Insert your code below and click "Submit" to scan for vulnerabilities.<br>
         Enter a passcode below for access to better AI models - ignore if you're running locally or don't have a passcode.
     </p>
-    <div class="controls">
+    <div class="controls"> <!-- Basic dropdown select for language-->
             <select class ="language-select" name="language" id="languageSelect">
                 <option value="python">Python</option>
                 <option value="javascript" class = "beta">JavaScript (Beta)</option>
                 <option value="java" class = "beta">Java (Beta)</option>
                 <option value="cpp" class = "beta">C++ (Beta)</option>
             </select>
-        
+        <!-- for entering the password-->
             <input type="password" class="passcode-input" id="passcodeBox" placeholder="Enter passcode here">
         </div>
     <textarea class="code-input" id="textBox" placeholder="Insert code here"></textarea>
 
-
+<!-- submit code button-->
     <div class="submit-code">
         <button class="submit-button" id="submitCode">Submit</button>
     </div>
-
+<!-- hides results so its not shown until submitted -->
    <h2 class="hidden" id="resultsHeader">Results</h2>
     <pre class="hidden" id="output"></pre>
-
+<!-- CWE link so users can click and look at the vulnerabilities-->
         <div class="mitre-link">
             <a
-                href="https://cwe.mitre.org/"
+                href="https://cwe.mitre.org/" 
                 target="_blank"
                 rel="noopener noreferrer"
             >
